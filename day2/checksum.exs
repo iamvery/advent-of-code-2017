@@ -21,6 +21,31 @@ defmodule Checksum do
   end
 
   defp diff(line), do: Enum.max(line) - Enum.min(line)
+
+  def calculate2(lines) do
+    lines
+    |> Enum.map(&div/1)
+    |> Enum.sum
+  end
+
+  defp div(line) do
+    {dividend, divisor} = locate_divisible(line)
+    div(dividend, divisor)
+  end
+
+  defp locate_divisible(line) do
+    line
+    |> permutations
+    |> Enum.find(&divisible?/1)
+  end
+
+  defp permutations(list) do
+    for i <- list, j <- list, do: {i, j}
+  end
+
+  defp divisible?({dividend, divisor}) do
+    dividend != divisor && rem(dividend, divisor) == 0
+  end
 end
 
 ExUnit.start
@@ -37,6 +62,17 @@ defmodule ChecksumTest do
 
     result = data |> Checksum.massage |> Checksum.calculate
     assert result == 18
+  end
+
+  test "example 2" do
+    data = """
+    5 9 2 8
+    9 4 7 3
+    3 8 6 5
+    """
+
+    result = data |> Checksum.massage |> Checksum.calculate2
+    assert result == 9
   end
 end
 
@@ -59,4 +95,6 @@ data = """
 6151  5857  4865  437 6210  237 37  410 544 214 233 6532  2114  207 5643  6852
 """
 IO.puts "The answer to part 1 is:"
-IO.puts data |> Checksum.massage |> Checksum.calculate
+#IO.puts data |> Checksum.massage |> Checksum.calculate
+IO.puts "The answer to part 2 is:"
+#IO.puts data |> Checksum.massage |> Checksum.calculate2
