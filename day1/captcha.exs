@@ -14,6 +14,8 @@ defmodule Captcha do
 
   defp sum(digits), do: Enum.reduce(digits, 0, &add/2)
 
+  #def rotate(list, 0), do: list
+  #def rotate([head | tail], n), do: rotate(tail ++ [head], n-1)
 
   defp rotate(list, count) do
     {left, right} = Enum.split(list, count)
