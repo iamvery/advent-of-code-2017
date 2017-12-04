@@ -10,12 +10,18 @@ defmodule Captcha do
     |> sum
   end
 
-  defp chunk(digits), do: Enum.chunk_every(digits, 2, 1, digits)
+  defp chunk(digits), do: Enum.zip(digits, rotate(digits, 1))
 
   defp sum(digits), do: Enum.reduce(digits, 0, &add/2)
 
-  defp add([n, n], sum), do: sum + n
-  defp add([_, _], sum), do: sum
+
+  defp rotate(list, count) do
+    {left, right} = Enum.split(list, count)
+    Enum.concat(right, left)
+  end
+
+  defp add({n, n}, sum), do: sum + n
+  defp add({_, _}, sum), do: sum
 end
 
 defmodule CaptchaTest do
