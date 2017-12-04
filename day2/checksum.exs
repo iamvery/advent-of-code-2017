@@ -16,18 +16,11 @@ defmodule Checksum do
 
   def calculate(lines) do
     lines
-    |> map2(&Enum.min/1, &Enum.max/1)
     |> Enum.map(&diff/1)
     |> Enum.sum
   end
 
-  defp map2(list, f1, f2) do
-    Enum.map list, fn item ->
-      {f1.(item), f2.(item)}
-    end
-  end
-
-  def diff({min, max}), do: max - min
+  defp diff(line), do: Enum.max(line) - Enum.min(line)
 end
 
 ExUnit.start
