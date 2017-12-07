@@ -3,12 +3,15 @@ defmodule Maze do
     if index < tuple_size(maze) do
       jump = elem(maze, index)
       new_index = index + jump
-      maze = replace(maze, index, jump + 1)
+      maze = replace(maze, index, calc(jump))
       walk(maze, new_index, step + 1)
     else
       step
     end
   end
+
+  defp calc(jump) when jump >= 3, do: jump - 1
+  defp calc(jump), do: jump + 1
 
   defp replace(tuple, index, value) do
     tuple |> Tuple.delete_at(index) |> Tuple.insert_at(index, value)
@@ -23,7 +26,7 @@ defmodule MazeTest do
   test "example 1" do
     maze = {0, 3, 0 , 1, -3}
     steps = Maze.walk(maze)
-    assert steps == 5
+    assert steps == 10
   end
 end
 
