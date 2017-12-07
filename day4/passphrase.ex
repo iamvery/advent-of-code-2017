@@ -6,6 +6,13 @@ defmodule Passphrase do
     |> no
   end
 
+  def very_valid?(passphrase) do
+    passphrase
+    |> words
+    |> check?(&anagram?/2)
+    |> no
+  end
+
   defp words(phrase), do: String.split(phrase)
 
   defp check?(words, check) do
@@ -20,6 +27,10 @@ defmodule Passphrase do
     fn item ->
       Enum.count(list, &check.(&1, item)) > 1
     end
+  end
+
+  defp anagram?(left, right) do
+    String.graphemes(left) |> Enum.sort == String.graphemes(right) |> Enum.sort
   end
 end
 
@@ -37,6 +48,14 @@ defmodule PassphraseTest do
     assert Passphrase.valid?("aa bb cc dd ee")
     refute Passphrase.valid?("aa bb cc dd aa")
     assert Passphrase.valid?("aa bb cc dd aaa")
+  end
+
+  test "example 2" do
+    assert Passphrase.very_valid?("abcde fghij")
+    refute Passphrase.very_valid?("abcde xyz ecdab")
+    assert Passphrase.very_valid?("a ab abc abd abf abj")
+    assert Passphrase.very_valid?("iiii oiii ooii oooi oooo")
+    refute Passphrase.very_valid?("oiii ioii iioi iiio")
   end
 end
 
@@ -556,6 +575,9 @@ qrwu mgnw hvflf ytspp mco ikvbqg fflvh wts cbbf
 """ |> String.trim
 phrases = String.split(input, "\n")
 valid_phrases = Enum.filter(phrases, &Passphrase.valid?/1)
+very_valid_phrases = Enum.filter(phrases, &Passphrase.very_valid?/1)
 
 IO.puts "The answer to part one is:"
 IO.puts length(valid_phrases)
+IO.puts "The answer to part two is:"
+IO.puts length(very_valid_phrases)
