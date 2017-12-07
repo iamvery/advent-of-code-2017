@@ -4,10 +4,13 @@ defmodule Memory do
     banks = List.replace_at(banks, index, 0)
     banks = distribute(banks, max, index+1)
 
-    if Enum.member?(past, banks) do
-      {banks, cycles}
+    existing = Enum.find(past, fn ({seen,_}) -> seen == banks end)
+
+    if existing do
+      {_, seen_at} = existing
+      {banks, cycles, cycles - seen_at}
     else
-      past = [banks | past]
+      past = [{banks, cycles} | past]
       redistribute(banks, past, cycles + 1)
     end
   end
@@ -29,10 +32,11 @@ defmodule MemoryTest do
 
   test "example 1" do
     banks = [0, 2, 7, 0]
-    {redistributed_banks, cycles} = Memory.redistribute(banks)
+    {redistributed_banks, cycles, seen_at} = Memory.redistribute(banks)
 
     assert redistributed_banks == [2, 4, 1, 2]
     assert cycles == 5
+    assert seen_at == 4
   end
 end
 
