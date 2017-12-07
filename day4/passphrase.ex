@@ -2,23 +2,23 @@ defmodule Passphrase do
   def valid?(passphrase) do
     passphrase
     |> words
-    |> duplicates?
+    |> check?(&==/2)
     |> no
   end
 
   defp words(phrase), do: String.split(phrase)
 
-  defp duplicates?(words) do
+  defp check?(words, check) do
     Enum.any?(words, fn word ->
-      duplicate_in(words).(word)
+      check_in(words, check).(word)
     end)
   end
 
   defp no(b), do: !b
 
-  def duplicate_in(list) do
+  def check_in(list, check) do
     fn item ->
-      Enum.count(list, &(&1 == item)) > 1
+      Enum.count(list, &check.(&1, item)) > 1
     end
   end
 end
@@ -28,9 +28,9 @@ ExUnit.start
 defmodule PassphraseTest do
   use ExUnit.Case
 
-  test "duplicate_in" do
-    assert Passphrase.duplicate_in([1,2,3]).(1) == false
-    assert Passphrase.duplicate_in([1,2,1]).(1) == true
+  test "check_in" do
+    assert Passphrase.check_in([1,2,3], &==/2).(1) == false
+    assert Passphrase.check_in([1,2,1], &==/2).(1) == true
   end
 
   test "example 1" do
