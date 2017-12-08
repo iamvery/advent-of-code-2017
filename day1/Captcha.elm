@@ -42,14 +42,14 @@ zip =
     List.map2 (,)
 
 
-chunk : List a -> List ( a, a )
-chunk list =
-    zip list (rotate list)
+chunk : Int -> List a -> List ( a, a )
+chunk shift list =
+    zip list (repeat rotate shift list)
 
 
 check : Int -> Int
 check number =
-    number |> digits |> chunk |> sum
+    number |> digits |> (chunk 1) |> sum
 
 
 sum : List ( Int, Int ) -> Int

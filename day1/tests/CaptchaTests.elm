@@ -17,7 +17,7 @@ suite =
         , test "zip" <|
             \() -> equal (Captcha.zip [ 1, 2, 3 ] [ 4, 5, 6 ]) [ ( 1, 4 ), ( 2, 5 ), ( 3, 6 ) ]
         , test "chunk" <|
-            \() -> equal (Captcha.chunk [ 1, 2, 3 ]) [ ( 1, 2 ), ( 2, 3 ), ( 3, 1 ) ]
+            \() -> equal (Captcha.chunk 1 [ 1, 2, 3 ]) [ ( 1, 2 ), ( 2, 3 ), ( 3, 1 ) ]
         , test "examples" <|
             \() -> equal (List.map Captcha.check [ 1122, 1111, 1234, 91212129 ]) [ 3, 4, 0, 9 ]
         ]
