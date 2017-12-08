@@ -2,7 +2,7 @@ module CaptchaTests exposing (..)
 
 import Expect exposing (equal)
 import Test exposing (..)
-import Captcha exposing (check)
+import Captcha
 
 
 suite : Test
