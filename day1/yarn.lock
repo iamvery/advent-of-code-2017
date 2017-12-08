@@ -279,9 +279,9 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-elm-test@^0.18.11:
-  version "0.18.11"
-  resolved "https://registry.yarnpkg.com/elm-test/-/elm-test-0.18.11.tgz#73a58d6726da9c020d9fc18336338c4d6a592ec4"
+elm-test@0.18.10:
+  version "0.18.10"
+  resolved "https://registry.yarnpkg.com/elm-test/-/elm-test-0.18.10.tgz#1a6375cec68c5fd5f7d3fe76c2f1f3c02d2b4a49"
   dependencies:
     binstall "1.2.0"
     chalk "2.1.0"
@@ -295,7 +295,6 @@ elm-test@^0.18.11:
     minimist "^1.2.0"
     murmur-hash-js "1.0.0"
     node-elm-compiler "4.3.3"
-    split "^1.0.1"
     supports-color "4.2.0"
     xmlbuilder "^8.2.2"
   optionalDependencies:
@@ -1144,12 +1143,6 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
-split@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/split/-/split-1.0.1.tgz#605bd9be303aa59fb35f9229fbea0ddec9ea07d9"
-  dependencies:
-    through "2"
-
 sshpk@^1.7.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.13.1.tgz#512df6da6287144316dc4c18fe1cf1d940739be3"
@@ -1239,10 +1232,6 @@ temp@^0.8.3:
   dependencies:
     os-tmpdir "^1.0.0"
     rimraf "~2.2.6"
-
-through@2:
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
 tough-cookie@~2.3.0:
   version "2.3.3"
