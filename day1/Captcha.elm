@@ -47,9 +47,23 @@ chunk shift list =
     zip list (repeat rotate shift list)
 
 
+chunk_half : List a -> List ( a, a )
+chunk_half list =
+    let
+        shift =
+            (List.length list) // 2
+    in
+        chunk shift list
+
+
 check : Int -> Int
 check number =
     number |> digits |> (chunk 1) |> sum
+
+
+check_half : Int -> Int
+check_half number =
+    number |> digits |> chunk_half |> sum
 
 
 sum : List ( Int, Int ) -> Int

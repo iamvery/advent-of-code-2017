@@ -20,4 +20,6 @@ suite =
             \() -> equal (Captcha.chunk 1 [ 1, 2, 3 ]) [ ( 1, 2 ), ( 2, 3 ), ( 3, 1 ) ]
         , test "examples" <|
             \() -> equal (List.map Captcha.check [ 1122, 1111, 1234, 91212129 ]) [ 3, 4, 0, 9 ]
+        , test "more examples" <|
+            \() -> equal (List.map Captcha.check_half [ 1212, 1221, 123425, 123123, 12131415 ]) [ 6, 0, 4, 12, 4 ]
         ]
