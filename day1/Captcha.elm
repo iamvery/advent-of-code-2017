@@ -26,6 +26,16 @@ rotate list =
             List.concat [ tail, [ head ] ]
 
 
+repeat : (a -> a) -> Int -> a -> a
+repeat fun until value =
+    case until of
+        0 ->
+            value
+
+        _ ->
+            repeat fun (until - 1) (fun value)
+
+
 zip : List a -> List b -> List ( a, b )
 zip =
     -- https://groups.google.com/forum/#!topic/elm-discuss/CymE5cijGpc

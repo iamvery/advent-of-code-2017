@@ -12,6 +12,8 @@ suite =
             \() -> equal (Captcha.digits 123) [ 1, 2, 3 ]
         , test "rotate" <|
             \() -> equal (Captcha.rotate [ 1, 2, 3 ]) [ 2, 3, 1 ]
+        , test "repeat" <|
+            \() -> equal (Captcha.repeat Captcha.rotate 2 [ 1, 2, 3 ]) [ 3, 1, 2 ]
         , test "zip" <|
             \() -> equal (Captcha.zip [ 1, 2, 3 ] [ 4, 5, 6 ]) [ ( 1, 4 ), ( 2, 5 ), ( 3, 6 ) ]
         , test "chunk" <|
