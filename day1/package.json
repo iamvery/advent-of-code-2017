@@ -2,5 +2,9 @@
   "dependencies": {
     "elm": "^0.18.0",
     "elm-test": "0.18.10"
+  },
+  "scripts": {
+    "test": "elm-test",
+    "watch": "elm-test --watch"
   }
 }
